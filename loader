@@ -1,0 +1,5 @@
+if game.placeID = 95082159892680 then
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/Dilliam4444/RobloxSciripts/refs/heads/main/Scripts/1SpeedKeyboardEscape",true))()
+else
+  print("Game not supported")
+end
