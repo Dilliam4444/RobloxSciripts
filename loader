@@ -1,13 +1,42 @@
-for i = 1, 100 do
-    io.write("\rLoading: [" .. string.rep("=", i) .. string.rep(" ", 100 - i) .. "] " .. i .. "%")
-    io.flush()
-    task.wait(0.03)
+-- ====================
+--        Loader
+-- ====================
+
+local function PrintLoadingBar()
+	for percent = 0, 100, 5 do
+		local filled = math.floor(percent / 5)
+		local empty = 20 - filled
+
+		local bar = string.rep("█", filled) .. string.rep("░", empty)
+
+		print("Loading: [" .. bar .. "] " .. percent .. "%")
+
+		task.wait(0.04)
+	end
 end
 
-print("\nDone")
+local function RunScript(url)
+	local success, result = pcall(function()
+		local code = game:HttpGet(url, true)
+		return loadstring(code)()
+	end)
 
-if game.placeID = 95082159892680 then
-  loadstring(game:HttpGet("https://raw.githubusercontent.com/Dilliam4444/RobloxSciripts/refs/heads/main/Scripts/1SpeedKeyboardEscape",true))()
+	if success then
+		print("Script loaded successfully.")
+	else
+		warn("Script failed to load:")
+		warn(result)
+	end
+end
+
+PrintLoadingBar()
+
+if game.PlaceId == 95082159892680 then
+	print("Game found: +1 Speed Keyboard Escape")
+
+	RunScript("https://raw.githubusercontent.com/Dilliam4444/RobloxSciripts/refs/heads/main/Scripts/1SpeedKeyboardEscape")
+
+
 else
-  print("Game not supported")
+	print("Game not supported.")
 end
